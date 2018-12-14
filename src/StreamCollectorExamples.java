@@ -52,7 +52,10 @@ public class StreamCollectorExamples {
 				strStream2.collect(Collectors.partitioningBy(s -> s.toLowerCase().startsWith("w")));
 		System.out.println(partitioned);
 		
-		
+		// Convert our array to a List via streams
+		strStream2 = Arrays.stream(groups);
+		List<String> strList = strStream2.collect(Collectors.toList());
+		System.out.println(strList);
 	}
 
 }
