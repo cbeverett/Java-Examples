@@ -1,0 +1,23 @@
+In the UNIX environment, a thread:
+
+Exists within a process and uses the process resources
+* Has its own independent flow of control as long as its parent process exists and the OS supports it
+* Duplicates only the essential resources it nees to be independently schedulable
+* May share the process resources with other threads that act equally independently (and dependently)
+* Dies if the parent process dies - or something similar
+* Is “lightweight” because most of the overhead has already been accomplished through the creation of its process
+Because threads within the same process share resources:
+* Changes made by one thread to shared system resources (such as closing a file) will be seen by all the other threads.
+* Two pointers having the same value point to the same data.
+* Reading and writing to the same memory locations is possible, and therefore requires explicit synchronization by the programmer.
+Programs having the following characteristics may be well suited for pthreads:
+* Work that can be executed, or data that can be operated on, by multiple tasks simultaneously
+* Block for potentially long I/O waits
+* Use many CPU cycles in some places, but not others
+* Must respond to asynchronous events
+* Some work is more important than other work (priority interrupts)
+Shared Memory Model
+* All threads have access to the same global, shared memory
+* Threads also have their own private data
+* Programmers are responsible for synchronizing access (protecting) globally shared data.
+Recommendation: Be careful if your application uses libraries or other objects that don’t explicitly guarantee thread-safeness.  When in doubt, assume they are not thread safe until proven otherwise.  This can be done by “serializing” the calls to the uncertain routine, etc.
