@@ -2,6 +2,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.Console;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -61,7 +62,8 @@ public class IOStreamExamples {
 		copyFileWithFileInputStream();
 		copyFileWithBufferedFileInputStream();
 		copyFileWithBufferedReader();
-		objectStreamExample();		
+		objectStreamExample();
+		consoleExample();
 	}
 
 	private static void copyFileWithFileInputStream() {
@@ -195,6 +197,20 @@ public class IOStreamExamples {
 		System.out.println(animalsFromDisk);
 		
 		cleanUp();
+		
+	}
+
+	private static void consoleExample() {
+		Console console = System.console();
+		
+		if(console != null) {
+			console.writer().println("Type something and press enter...");
+			String userInput = console.readLine();
+			console.writer().println("You typed: " + userInput);
+		}
+		else {
+			System.out.println("Text interactions not supported.");
+		}
 		
 	}
 
